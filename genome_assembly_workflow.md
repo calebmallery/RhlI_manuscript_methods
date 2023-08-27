@@ -25,7 +25,7 @@ Download the reference genome
  Map trimmed reads to the reference genome
  
 	bwa mem pa14_reference.fna sample_R1_val_1.fq.gz sample_R2_val_2.fq.gz | samtools sort | samtools view -Sb -o sample_sorted.bam
-
+ > Note: piping 'samtools sort'.
  Assess the quality of the alignments
   
 	samtools flagstat sample_sorted.bam
