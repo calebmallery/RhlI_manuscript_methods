@@ -25,12 +25,29 @@ Download the reference genome
  Map trimmed reads to the reference genome
  
 	bwa mem pa14_reference.fna sample_R1_val_1.fq.gz sample_R2_val_2.fq.gz | samtools sort | samtools view -Sb -o sample_sorted.bam
- > Note: piping 'samtools sort'.
+> Note: this command pipes to **`samtools`** twice - once to sort the reads and the next time to convert the output to binary format (SAM to BAM) and save the file.
+
+> The **`-F 4`** flag specifies that samtools should not write unaligned reads to the bam file.
  Assess the quality of the alignments
   
 	samtools flagstat sample_sorted.bam
 
-> Here is an example of output from samtools flagstat.
+>Example flagstat output from (https://github.com/bahlolab/bioinfotools/blob/master/SAMtools/flagstat.md):
+ 
+	 1 480861162 + 0 in total (QC-passed reads + QC-failed reads)
+	 2 0 + 0 secondary
+	 3 3055712 + 0 supplementary
+	 4 0 + 0 duplicates
+	 5 475908985 + 0 mapped (98.97%:-nan%)
+	 6 477805450 + 0 paired in sequencing
+	 7 238902725 + 0 read1
+	 8 238902725 + 0 read2
+	 9 461777552 + 0 properly paired (96.65%:-nan%)
+	 10 472089012 + 0 with itself and mate mapped
+	 11 764261 + 0 singletons (0.16%:-nan%)
+  	 12 5697922 + 0 with mate mapped to a different chr
+	 13 2424881 + 0 with mate mapped to a different chr (mapQ>=5).
+> In this output, I commonly check line 5 for the percentage of reads mapped and
 
  Index the sorted.bam file for mpileup
   
