@@ -2,6 +2,8 @@ Objective: Perform reference based genome assemblies for P. aeruginosa acute cli
 
 Download the raw fastq files from the SRA
 
+	SRA command here
+
 Clean your raw reads and remove any remaining adapters with TrimGalore, where fastq_R1 and fastq_R2 are your fastq files.
 
 	trim_galore -q 20 --length 100 --paired fastq_R1 fastq_R2
