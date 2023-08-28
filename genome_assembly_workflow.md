@@ -1,14 +1,16 @@
 Objective: Perform reference based genome assemblies for P. aeruginosa acute clinical isolates from NCBI BioProject `PRJNA288601`.
 
-Download the raw fastq files from the SRA
+Download the raw fastq files from the Sequence Read Archive (SRA)
 
-	SRA command here
+	fasterq-dump SRRname
+ > All of the SRR names used in this study can be found in `SRRnames.txt`
 
 Clean your raw reads and remove any remaining adapters with TrimGalore, where fastq_R1 and fastq_R2 are your fastq files.
 
 	trim_galore -q 20 --length 100 --paired fastq_R1 fastq_R2
+> **`-q`** specifies a minimum quality Phred score of 20. **`--length`** will discard any reads >100 bp.
 
- This can be run on many files at once
+ This can also be run on many files at once
 
 	parallel --xapply trim_galore --paired --length 100 -q 20 -o trim_galore/ ::: *_R1.fastq.gz ::: *_R2.fastq.gz
 
@@ -28,8 +30,16 @@ Download the reference genome
  
 	bwa mem pa14_reference.fna sample_R1_val_1.fq.gz sample_R2_val_2.fq.gz | samtools sort | samtools view -Sb -o sample_sorted.bam
 > Note: this command pipes to **`samtools`** twice - once to sort the reads and the next time to convert the output to binary format (SAM to BAM) and save the file.
-
 > The **`-F 4`** flag specifies **`samtools`** to exclude unaligned reads to the output .bam file.
+ Assess the quality of the alignments
+
+This can also be done on many files at once (see `bwa.mem.sh`).
+ 
+	nano bwa.mem.sh
+ 	chomd a+x bwa.mem.sh
+  	./bwa.mem.sh
+> Note: copy `bwa.mem.sh` to a new file and execute the above commands. It will only work if the file extensions are the same as above.
+
  Assess the quality of the alignments
   
 	samtools flagstat sample_sorted.bam
