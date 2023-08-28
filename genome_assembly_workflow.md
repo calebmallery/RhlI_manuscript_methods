@@ -27,7 +27,7 @@ Download the reference genome
 	bwa mem pa14_reference.fna sample_R1_val_1.fq.gz sample_R2_val_2.fq.gz | samtools sort | samtools view -Sb -o sample_sorted.bam
 > Note: this command pipes to **`samtools`** twice - once to sort the reads and the next time to convert the output to binary format (SAM to BAM) and save the file.
 
-> The **`-F 4`** flag specifies that samtools should not write unaligned reads to the bam file.
+> The **`-F 4`** flag specifies **`samtools`** to exclude unaligned reads to the output .bam file.
  Assess the quality of the alignments
   
 	samtools flagstat sample_sorted.bam
@@ -47,7 +47,7 @@ Download the reference genome
 	 11 764261 + 0 singletons (0.16%:-nan%)
   	 12 5697922 + 0 with mate mapped to a different chr
 	 13 2424881 + 0 with mate mapped to a different chr (mapQ>=5).
-> In this output, I commonly check line 5 for the percentage of reads mapped and
+> In this output, I commonly check line 1 for the number of QC-passed reads and line 5 for the percentage of reads mapped.
 
  Index the sorted.bam file for mpileup
   
@@ -55,24 +55,24 @@ Download the reference genome
 
 Coverage summary (base pair resolution).
  
-	 bcftools mpileup -f pa14_reference.fna sample_sorted.bam  | bcftools call -c -o sample.vcf
+	 bcftools mpileup -f pa14_reference.fna sample_sorted.bam  | bcftools call -m -o sample.vcf
   
-> The **`-c`** flag specifies.
+> The **`-m`** flag specifies the multi-allelic variant caller for identifying genotype liklehoods.
 
 Compress the .vcf file using bcftools
  
 	 bcftools convert sample.vcf -O z -o sample.vcf.gz
     
-> The **`-c`** flag specifies.
+> The **`-O z`** flag specifies a compressed .vcf output file.
 
 Index compressed vcf
  
 	 bcftools index sample.vcf.gz
 
-FASTA file generation
+FASTA file generation. Applies the VCF file to a known reference sequence.
  
 	 bcftools consensus -f pa14_reference_genomic.fna sample.vcf.gz -o sample.fasta
 
-> The **`-c`** flag specifies.
+> The output of bcftools consensus can be used as input for annotation.
 
 
