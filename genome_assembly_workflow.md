@@ -1,4 +1,4 @@
-Commands issued and rationale for reference based genome assemblies for P. aeruginosa acute clinical isolates from NCBI BioProject `PRJNA288601` and annotation.
+Commands issued for reference based genome assemblies for P. aeruginosa acute clinical isolates from NCBI BioProject `PRJNA288601` and annotation.
 
 Download the raw fastq files from the Sequence Read Archive (SRA).
 
