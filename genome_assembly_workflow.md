@@ -1,5 +1,5 @@
 Commands issued for reference based genome assemblies for P. aeruginosa acute clinical isolates from NCBI BioProject `PRJNA288601` and annotation.
-
+#Reference-based assembly
 Download the raw fastq files from the Sequence Read Archive (SRA).
 
 	fasterq-dump SRRaccession
@@ -42,7 +42,7 @@ This can also be done on many files at once (see `many_bwa.mem.sh`).
 
 Many can also be done in just one line if preffered.
   
-	for i in `cat SRRaccessions.txt`; do bwa mem sa.fna $i"_1_val_1.fq.gz" $i"_2_val_2.fq.gz" | samtools sort | samtools view -F 4 -o $i".sorted.bam"; done
+	for i in `cat SRRaccessions.txt`; do bwa mem pa14_reference.fna $i"_1_val_1.fq.gz" $i"_2_val_2.fq.gz" | samtools sort | samtools view -F 4 -o $i".sorted.bam"; done
  
  Assess the quality of the alignments.
   
@@ -90,5 +90,9 @@ FASTA file generation. Applies the VCF file to a known reference sequence.
 	 bcftools consensus -f pa14_reference_genomic.fna sample.vcf.gz -o sample.fasta
 
 > The output of **`bcftools consensus`**  can be used as input for annotation.
-
-
+#Genome annotation
+Prokka used for annotation
+ 
+	docker run prokka command here
+> Note: We use the docker image, pulling the most recent version from the staphb repository. This command can be executed without **`docker run pwd`** if prokka is installed locally.
+> The **`--proteins`** flag points prokka towards `pa14_reference.faa` (reference proteome) this is used to generate compatable gene names to use in the output files.
