@@ -34,8 +34,9 @@ Download the reference genome
  Assess the quality of the alignments
 
 This can also be done on many files at once (see `bwa.mem.sh`).
- 
-	nano bwa.mem.sh
+ 	
+	ls *_1.fq.gz | cut -d "_" -f 1 > SRRlist.txt
+ 	nano bwa.mem.sh
  	chomd a+x bwa.mem.sh
   	./bwa.mem.sh
 > Note: copy `bwa.mem.sh` to a new file and execute the above commands. It will only work if the file extensions are the same as above.
