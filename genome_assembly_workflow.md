@@ -1,4 +1,4 @@
-Objective: Perform reference based genome assemblies for P. aeruginosa acute clinical isolates from NCBI BioProject `PRJNA288601`.
+Commands issued and rationale for reference based genome assemblies for P. aeruginosa acute clinical isolates from NCBI BioProject `PRJNA288601` and annotation.
 
 Download the raw fastq files from the Sequence Read Archive (SRA).
 
