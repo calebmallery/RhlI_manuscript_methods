@@ -1,20 +1,20 @@
 Objective: Perform reference based genome assemblies for P. aeruginosa acute clinical isolates from NCBI BioProject `PRJNA288601`.
 
-Download the raw fastq files from the Sequence Read Archive (SRA)
+Download the raw fastq files from the Sequence Read Archive (SRA).
 
 	fasterq-dump SRRaccession
  > All of the SRR names used in this study can be found in `SRRaccessions.txt`
 
-Clean your raw reads and remove any remaining adapters with TrimGalore, where fastq_R1 and fastq_R2 are your fastq files.
+Clean raw reads by length and Phred score while remove any remaining adapters.
 
 	trim_galore -q 20 --length 100 --paired fastq_R1 fastq_R2
 > **`-q`** specifies a minimum quality Phred score of 20. **`--length`** will discard any reads >100 bp.
 
- This can also be run on many files at once
+ This can also be run on many files at once.
 
 	parallel --xapply trim_galore --paired --length 100 -q 20 -o trim_galore/ ::: *_R1.fastq.gz ::: *_R2.fastq.gz
 
-Download the reference genome
+Download the reference genome.
 
 	datasets download genome accession GCF_000014625.1
 	unzip ncbi_dataset.zip
@@ -22,11 +22,11 @@ Download the reference genome
 	mv GCF_000014625.1_ASM1462v1_genomic.fna pa14_reference.fna
  > I like to rename the file to something more meaningful and easier for downstream use.
 
- Index the reference genome
+ Index the reference genome.
  
 	bwa index pa14_reference_genomic.fna
  
- Map trimmed reads to the reference genome
+ Map trimmed reads to the reference genome.
  
 	bwa mem pa14_reference.fna sample_R1_val_1.fq.gz sample_R2_val_2.fq.gz | samtools sort | samtools view -Sb -o sample_sorted.bam
 > Note: this command pipes to **`samtools`** twice - once to sort the reads and the next time to convert the output to binary format (SAM to BAM) and save the file.
@@ -44,11 +44,11 @@ Many can also be done in just one line if preffered.
   
 	for i in `cat SRRaccessions.txt`; do bwa mem sa.fna $i"_1_val_1.fq.gz" $i"_2_val_2.fq.gz" | samtools sort | samtools view -F 4 -o $i".sorted.bam"; done
  
- Assess the quality of the alignments
+ Assess the quality of the alignments.
   
 	samtools flagstat sample_sorted.bam
 
->Example flagstat output from (https://github.com/bahlolab/bioinfotools/blob/master/SAMtools/flagstat.md):
+>Example **`flagstat`**  output from (https://github.com/bahlolab/bioinfotools/blob/master/SAMtools/flagstat.md):
  
 	 1 480861162 + 0 in total (QC-passed reads + QC-failed reads)
 	 2 0 + 0 secondary
@@ -65,7 +65,7 @@ Many can also be done in just one line if preffered.
 	 13 2424881 + 0 with mate mapped to a different chr (mapQ>=5).
 > In this output, I commonly check line 1 for the number of QC-passed reads and line 5 for the percentage of reads mapped.
 
- Index the sorted.bam file for mpileup
+ Index the sorted.bam file for **`mpileup`** .
   
 	 samtools faidx sample.sorted.bam
 
@@ -75,20 +75,20 @@ Coverage summary (base pair resolution).
   
 > The **`-m`** flag specifies the multi-allelic variant caller for identifying genotype liklehoods.
 
-Compress the .vcf file using bcftools
+Compress the vcf file using **`bcftools`** .
  
 	 bcftools convert sample.vcf -O z -o sample.vcf.gz
     
 > The **`-O z`** flag specifies a compressed .vcf output file.
 
-Index compressed vcf
- 
+Index the compressed vcf file.
+  
 	 bcftools index sample.vcf.gz
 
 FASTA file generation. Applies the VCF file to a known reference sequence.
  
 	 bcftools consensus -f pa14_reference_genomic.fna sample.vcf.gz -o sample.fasta
 
-> The output of bcftools consensus can be used as input for annotation.
+> The output of **`bcftools consensus`**  can be used as input for annotation.
 
 
