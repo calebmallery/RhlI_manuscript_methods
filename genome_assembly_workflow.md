@@ -3,7 +3,7 @@ Objective: Perform reference based genome assemblies for P. aeruginosa acute cli
 Download the raw fastq files from the Sequence Read Archive (SRA)
 
 	fasterq-dump SRRaccession
- > All of the SRR names used in this study can be found in `SRRnames.txt`
+ > All of the SRR names used in this study can be found in `SRRaccessions.txt`
 
 Clean your raw reads and remove any remaining adapters with TrimGalore, where fastq_R1 and fastq_R2 are your fastq files.
 
@@ -31,16 +31,19 @@ Download the reference genome
 	bwa mem pa14_reference.fna sample_R1_val_1.fq.gz sample_R2_val_2.fq.gz | samtools sort | samtools view -Sb -o sample_sorted.bam
 > Note: this command pipes to **`samtools`** twice - once to sort the reads and the next time to convert the output to binary format (SAM to BAM) and save the file.
 > The **`-F 4`** flag specifies **`samtools`** to exclude unaligned reads to the output .bam file.
- Assess the quality of the alignments
 
-This can also be done on many files at once (see `bwa.mem.sh`).
+This can also be done on many files at once (see `many_bwa.mem.sh`).
  	
-	ls *_1.fq.gz | cut -d "_" -f 1 > SRRlist.txt
+	ls *_1.fq.gz | cut -d "_" -f 1 > SRRaccessions.txt
  	nano bwa.mem.sh
  	chomd a+x bwa.mem.sh
   	./bwa.mem.sh
-> Note: copy `bwa.mem.sh` to a new file and execute the above commands. It will only work if the file extensions are the same as above.
+> Note: copy `many_bwa.mem.sh` to a new file and execute the above commands. It will only work if the file extensions are the same as above.
 
+Many can also be done in just one line if preffered.
+  
+	for i in `cat SRRaccessions.txt`; do bwa mem sa.fna $i"_1_val_1.fq.gz" $i"_2_val_2.fq.gz" | samtools sort | samtools view -F 4 -o $i".sorted.bam"; done
+ 
  Assess the quality of the alignments
   
 	samtools flagstat sample_sorted.bam
