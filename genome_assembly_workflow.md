@@ -79,7 +79,7 @@ Compress the vcf file using **`bcftools`** .
  
 	 bcftools convert sample.vcf -O z -o sample.vcf.gz
     
-> The **`-O z`** flag specifies a compressed .vcf output file.
+> The **`-O z`** flag specifies a compressed vcf output file.
 
 Index the compressed vcf file.
   
