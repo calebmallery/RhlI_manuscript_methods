@@ -2,7 +2,7 @@ Objective: Perform reference based genome assemblies for P. aeruginosa acute cli
 
 Download the raw fastq files from the Sequence Read Archive (SRA)
 
-	fasterq-dump SRRname
+	fasterq-dump SRRaccession
  > All of the SRR names used in this study can be found in `SRRnames.txt`
 
 Clean your raw reads and remove any remaining adapters with TrimGalore, where fastq_R1 and fastq_R2 are your fastq files.
