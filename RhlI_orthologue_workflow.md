@@ -5,3 +5,5 @@ from all bacterial groups. This search yielded 709 genes across 607 species. To 
   - IPR001690: Autoinducer synthase
   - IPR016181: Acyl-CoA N-acyltransferase
   - IPR018311: Autoinducer synthesis, conserved site
+
+Additionally we wanted to exclude seqeunces that were considerably larger/smaller than our querry sequences (PA14 RhlI is 201 AA).
