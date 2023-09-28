@@ -3,11 +3,9 @@ This repository contains the packages used, commands issued, and files to genera
 
 # Genome assembly and annotation
 Data generating commands used for reference genome assembly and annotation:
-- `genome_assembly_workflow.md` markdown file containing the commands issued to assemble the genomes used in this study.
-> Includes additional file information for `SRRaccessions.txt` and `many_bwa.mem.sh`
-- `genome_annotation_workflow.md` markdown file containing the commands issued to annotate the genomes used in this study.
-> Includes additional file information for `many_prokka.sh`.
-# Phylogenetic analysis
+- `genome_assembly_workflow.md` markdown file containing the commands issued to assemble and annotate the genomes used in this study.
+> Includes additional file information for `SRRaccessions.txt` , `many_bwa.mem.sh` , and `many_prokka.sh`
+# Phylogenetic analyses
 Input files and commands issued to generate phylogenetic trees:
 - `RhlI_acute_isolate_workflow.md` markdown file containing the commands issued to generate figure 1A.
 - `LasI_orthologue_workflow.md` markdown file containing the commands issued to generate supplemental figure 1B.
