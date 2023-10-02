@@ -24,7 +24,7 @@ doi:10.1093/bioinformatics/btp352
 Danececk, P. et al. Twelve years of SAMtools and BCFtools. Gigascience 10, 1-4 (2021).
 doi:10.1093/gigascience/giab008
 
-> [Cutadapt](https://github.com/marcelm/cutadapt) vx.x.x
+> [Cutadapt](https://github.com/marcelm/cutadapt) v2.8.0
 Martin, M. Cutadapt removes adapter sequences from high-throughput sequencing reads. EMBnet. journal 17, 10-12 (2011).
 doi:10.14806/ej.17.1.200
 
