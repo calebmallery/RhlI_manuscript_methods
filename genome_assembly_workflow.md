@@ -1,11 +1,11 @@
 Commands issued for reference based genome assemblies for P. aeruginosa acute clinical isolates from NCBI BioProject `PRJNA288601` and annotation.
-#Reference-based assembly
+# Reference-based assembly
 Download the raw fastq files from the Sequence Read Archive (SRA).
 
 	fasterq-dump SRRaccession
  > All of the SRR names used in this study can be found in `SRRaccessions.txt`
 
-Clean raw reads by length and Phred score while remove any remaining adapters.
+Clean raw reads by length and Phred score and remove any remaining adapters.
 
 	trim_galore -q 20 --length 100 --paired fastq_R1 fastq_R2
 > **`-q`** specifies a minimum quality Phred score of 20. **`--length`** will discard any reads >100 bp.
@@ -21,6 +21,8 @@ Download the reference genome.
 	cd ncbi_dataset/data/GCF_000014625.1
 	mv GCF_000014625.1_ASM1462v1_genomic.fna pa14_reference.fna
  > I like to rename the file to something more meaningful and easier for downstream use.
+
+ > Reference file can be found in this repository `data/pa14_reference.fna`
 
  Index the reference genome.
  
@@ -87,7 +89,7 @@ Index the compressed vcf file.
 
 FASTA file generation. Applies the VCF file to a known reference sequence.
  
-	 bcftools consensus -f pa14_reference_genomic.fna sample.vcf.gz -o sample.fasta
+	 bcftools consensus -f pa14_reference.fna sample.vcf.gz -o sample.fasta
 
 > The output of **`bcftools consensus`**  can be used as input for annotation.
 #Genome annotation
@@ -96,3 +98,11 @@ Prokka used for annotation
 	docker run prokka command here
 > Note: We use the docker image, pulling the most recent version from the staphb repository. This command can be executed without **`docker run pwd`** if prokka is installed locally.
 > The **`--proteins`** flag points prokka towards `pa14_reference.faa` (reference proteome) this is used to generate compatable gene names to use in the output files.
+
+This can be run across many files 
+  
+	 ls *.fasta > prokka_list
+  	 nano many_prokka.sh
+         chmod a+x many_prokka.sh
+	 ./many_prokka.sh
+  > Note: copy `many_prokka.sh` to a new file and execute the above commands. It will only work if the file extensions are the same as above.
