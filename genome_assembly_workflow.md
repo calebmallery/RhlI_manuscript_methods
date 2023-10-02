@@ -95,12 +95,12 @@ FASTA file generation. Applies the VCF file to a known reference sequence.
 #Genome annotation
 Prokka used for annotation
  
-	docker run prokka command here
-> Note: We use the docker image, pulling the most recent version from the staphb repository. This command can be executed without **`docker run pwd`** if prokka is installed locally.
+	prokka --outdir path/to/outdir path/to/inputfile --proteins pa14_refernce.faa
 > The **`--proteins`** flag points prokka towards `pa14_reference.faa` (reference proteome) this is used to generate compatable gene names to use in the output files.
+> Reference file can be found in this repository `data/pa14_reference.faa`
 
 This can be run across many files 
-  
+
 	 ls *.fasta > prokka_list
   	 nano many_prokka.sh
          chmod a+x many_prokka.sh
