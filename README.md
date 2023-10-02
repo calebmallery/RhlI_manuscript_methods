@@ -1,5 +1,5 @@
 # Manuscript code repository
-This repository contains the packages used, commands issued, and files to generate figures for the manuscript titled "Quorum-sensing synthase mutations re-calibrate autoinducer concentrations in clinical isolates of Pseudomonas aeruginosa to enhance pathogenesis". The goal of this repository is to increase transparency and reproducibility.
+This repository contains the packages used, commands issued, and raw files to generate figures for the manuscript titled "Quorum-sensing synthase mutations re-calibrate autoinducer concentrations in clinical isolates of Pseudomonas aeruginosa to enhance pathogenesis". The goal of this repository is to increase transparency and reproducibility.
 
 # Genome assembly and annotation
 Data generating commands used for reference genome assembly and annotation:
