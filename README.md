@@ -1,15 +1,15 @@
 # Manuscript code repository
-This repository contains the packages used, commands issued, and raw files to generate figures for the manuscript titled "Quorum-sensing synthase mutations re-calibrate autoinducer concentrations in clinical isolates of Pseudomonas aeruginosa to enhance pathogenesis". The goal of this repository is to increase transparency and reproducibility.
+This repository contains the packages used, commands issued, and raw files to generate figures 1A, S1B, and S2 for the manuscript titled "Quorum-sensing synthase mutations re-calibrate autoinducer concentrations in clinical isolates of Pseudomonas aeruginosa to enhance pathogenesis". The goal of this repository is to increase transparency and reproducibility.
 
 # Genome assembly and annotation
-Data generating commands used for reference genome assembly and annotation:
+Raw files and commands issued for reference genome assembly and annotation:
 - `genome_assembly_workflow.md` markdown file containing the commands issued to assemble and annotate the genomes used in this study.
 > Includes additional file information for `SRRaccessions.txt` , `many_bwa.mem.sh` , and `many_prokka.sh`
 # Phylogenetic analyses
 Input files and commands issued to generate phylogenetic trees:
 - `RhlI_acute_isolate_workflow.md` markdown file containing the commands issued to generate figure 1A.
-- `LasI_orthologue_workflow.md` markdown file containing the commands issued to generate supplemental figure 1B.
-- `RhlI_PA_workflow.md` markdown file containing the commands issued to generate figure X.
+- `LasI_orthologue_workflow.md` markdown file containing the commands issued to generate supplemental figure S1B.
+- `RhlI_PA_workflow.md` markdown file containing the commands issued to generate figure S2.
 
 # Citation information
 List of packages, versions used, citations, and relevant links.
