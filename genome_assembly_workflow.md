@@ -119,7 +119,7 @@ This can be run across many files
 > Note: The '**-keepheader**' option sepcifies to keep headers, I've had unfortunate times with trimal stealing my headers without
 > this flag. '**-gt 0.8**' specifies a gap-threshold of 0.8, '**-st 0.001**' specfies the minimum similarity allowed, and '**-cons 60**' specifiees the minimum percentage of positions from the original alignment to conserve.
 
-Tree was generated using iqtree
+Tree was generated for figure 1A using iqtree
 	
  	iqtree -s rhlI_aln_trm.faa -bb 1000 -m AUTO
 > Note: The tree was visualized using [iTOL](https://itol.embl.de/).
