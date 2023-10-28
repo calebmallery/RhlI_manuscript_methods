@@ -44,8 +44,8 @@ Now that we have our filtered sequences, we can align [MUSCLE](https://www.drive
 
 	trimal -in rhlI_filtered_uniq_aln.faa -out rhlI_filt_uniq_aln_trm.faa -keepheader -gt 0.8 -st 0.001 -cons 60
 > Note: The '**-keepheader**' option sepcifies to keep headers, I've had unfortunate times with trimal stealing my headers without
-> this flag. '**-gt 0.8**' specifies, '**-st 0.001**' specfies , and '**-cons 60**' specifiees.
+> this flag. '**-gt 0.8**' specifies a gap-threshold of 0.8, '**-st 0.001**' specfies the minimum similarity allowed, and '**-cons 60**' specifiees the minimum percentage of positions from the original alignment to conserve.
 
-To generate the tree used in figure SX:
+To generate the tree used in figure S1B:
 	
  	iqtree -s rhlI_filt_uniq_aln_trm.faa -bb 1000 -m AUTO
