@@ -10,7 +10,7 @@ Trimmed with trimal
 
 Tree made with iTOL
 
-    itol -s pa_rhli_aln_trm.faa -bb 1000 -m
+    iqtree -s pa_rhli_aln_trm.faa -bb 1000 -m
 > Note: The '**-keepheader**' option sepcifies to keep headers, I've had unfortunate times with trimal stealing my headers without
 > this flag. '**-gt 0.8**' specifies a gap-threshold of 0.8, '**-st 0.001**' specfies the minimum similarity allowed, and '**-cons 60**' specifiees the minimum percentage of positions from the original alignment to conserve.
 
