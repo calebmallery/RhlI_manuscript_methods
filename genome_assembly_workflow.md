@@ -106,3 +106,20 @@ This can be run across many files
          chmod a+x many_prokka.sh
 	 ./many_prokka.sh
   > Note: copy `many_prokka.sh` to a new file and execute the above commands. It will only work if the file extensions are the same as above.
+
+ Using the annotations outlined above, sequences annotated as being rhlI were subject to the BLASTp tool on Pseudomonas DB to identify mutations.
+ A file with all rhlI sequences was made `rhli.faa`.
+
+ RhlI sequences were aligned and trimed:
+
+ 	muscle -in rhlI.faa -out rhlI_aln.faa -maxiters 3
+> Note: The '**-maxiters**' is set to 3 to specify how many iterations of [MUSCLE](https://www.drive5.com/muscle/) to run.
+
+	trimal -in rhlI_aln.faa -out rhlI_aln_trm.faa -keepheader -gt 0.8 -st 0.001 -cons 60
+> Note: The '**-keepheader**' option sepcifies to keep headers, I've had unfortunate times with trimal stealing my headers without
+> this flag. '**-gt 0.8**' specifies a gap-threshold of 0.8, '**-st 0.001**' specfies the minimum similarity allowed, and '**-cons 60**' specifiees the minimum percentage of positions from the original alignment to conserve.
+
+Tree was generated using iqtree
+	
+ 	iqtree -s rhlI_aln_trm.faa -bb 1000 -m AUTO
+> Note: The tree was visualized using [iTOL](https://itol.embl.de/).
