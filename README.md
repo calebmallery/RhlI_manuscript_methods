@@ -8,7 +8,7 @@ Raw files and commands issued for reference genome assembly and annotation:
 # Phylogenetic analyses
 Input files and commands issued to generate phylogenetic trees:
 - `RhlI_acute_isolate_workflow.md` markdown file containing the commands issued to generate figure 1A.
-- `LasI_orthologue_workflow.md` markdown file containing the commands issued to generate supplemental figure S1B.
+- `LuxI_orthologue_workflow.md` markdown file containing the commands issued to generate supplemental figure S1B.
 - `RhlI_PA_workflow.md` markdown file containing the commands issued to generate figure S2.
 
 # Citation information
